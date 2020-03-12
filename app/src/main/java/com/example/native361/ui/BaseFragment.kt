@@ -19,9 +19,7 @@ open class BaseFragment : Fragment() {
     }
 
     protected val appViewModel: AppViewModel by lazy {
-        ViewModelProvider(activity!!, ViewModelProvider.NewInstanceFactory()).get(
-            AppViewModel::class.java
-        ).apply {
+        ViewModelProvider(activity!!)[AppViewModel::class.java].apply {
             dialogMessage.observe(viewLifecycleOwner, Observer {
                 it?.let {
                     logger.info(it.toString())

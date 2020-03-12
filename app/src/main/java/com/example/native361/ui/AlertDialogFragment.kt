@@ -5,7 +5,6 @@
 package com.example.native361.ui
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
@@ -65,7 +64,7 @@ class AlertDialogFragment : DialogFragment() {
             builder.setTitle(arguments?.getString(KEY_TITLE))
                 .setPositiveButton(R.string.button_ok) { dialog, which ->
                     logger.info("dialog=$dialog which=$which")
-                    targetFragment?.onActivityResult(targetRequestCode, Activity.RESULT_OK, null)
+                    targetFragment?.onActivityResult(targetRequestCode, which, null)
                     dialog.dismiss()
                 }
             builder.create()

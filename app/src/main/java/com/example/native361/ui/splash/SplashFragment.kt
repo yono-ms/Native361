@@ -21,10 +21,9 @@ class SplashFragment : BaseFragment() {
     }
 
     private val viewModel: SplashViewModel by lazy {
-        ViewModelProvider(
-            this,
-            SplashViewModel.Factory(appViewModel)
-        ).get(SplashViewModel::class.java)
+        ViewModelProvider(this)[SplashViewModel::class.java].also {
+            it.appViewModel = appViewModel
+        }
     }
 
     override fun onCreateView(
