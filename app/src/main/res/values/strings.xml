@@ -4,4 +4,6 @@
 
 <resources>
     <string name="app_name">Native361</string>
+    <string name="text_loading">Now loading</string>
+    <string name="button_ok">OK</string>
 </resources>
