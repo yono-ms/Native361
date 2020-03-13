@@ -2,9 +2,8 @@
  * Copyright (c) 2020. No name
  */
 
-package com.example.native361.ui.splash
+package com.example.native361.ui.home
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,19 +11,17 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.native361.R
-import com.example.native361.constant.Destination
-import com.example.native361.constant.RequestCode
-import com.example.native361.databinding.SplashFragmentBinding
+import com.example.native361.databinding.HomeFragmentBinding
 import com.example.native361.ui.BaseFragment
 
-class SplashFragment : BaseFragment() {
+class HomeFragment : BaseFragment() {
 
     companion object {
-        fun newInstance() = SplashFragment()
+        fun newInstance() = HomeFragment()
     }
 
-    private val viewModel: SplashViewModel by lazy {
-        ViewModelProvider(this)[SplashViewModel::class.java].also {
+    private val viewModel: HomeViewModel by lazy {
+        ViewModelProvider(this)[HomeViewModel::class.java].also {
             it.appViewModel = appViewModel
         }
     }
@@ -33,9 +30,9 @@ class SplashFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = DataBindingUtil.inflate<SplashFragmentBinding>(
+        val binding = DataBindingUtil.inflate<HomeFragmentBinding>(
             inflater,
-            R.layout.splash_fragment,
+            R.layout.home_fragment,
             container,
             false
         ).also {
@@ -48,15 +45,5 @@ class SplashFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         logger.debug("onViewCreated savedInstanceState=$savedInstanceState")
-        if (savedInstanceState == null) {
-            viewModel.start()
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (requestCode) {
-            RequestCode.ALERT.rawValue -> appViewModel.destination.value = Destination.REPLACE_HOME
-            else -> super.onActivityResult(requestCode, resultCode, data)
-        }
     }
 }

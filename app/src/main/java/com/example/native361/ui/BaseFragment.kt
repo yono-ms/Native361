@@ -25,7 +25,7 @@ open class BaseFragment : Fragment() {
                     logger.info(it.toString())
                     val dialog = AlertDialogFragment.newInstance(it, this@BaseFragment)
                     dialog.show(activity!!.supportFragmentManager, "alert")
-                    dialogMessage.postValue(null)
+                    dialogMessage.value = null
                 }
             })
         }

@@ -11,8 +11,8 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.native361.Constants
 import com.example.native361.R
+import com.example.native361.constant.RequestCode
 import kotlinx.android.synthetic.main.dialog_error.view.*
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -39,7 +39,7 @@ class AlertDialogFragment : DialogFragment() {
                         putString(KEY_EXCEPTION, it.toString())
                     }
                 }
-                target?.let { setTargetFragment(target, Constants.ALERT) }
+                target?.let { setTargetFragment(target, RequestCode.ALERT.rawValue) }
             }
         }
     }
