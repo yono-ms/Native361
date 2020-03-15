@@ -8,11 +8,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.native361.R
 import com.example.native361.databinding.HomeFragmentBinding
+import com.example.native361.repository.database.model.Repo
 import com.example.native361.ui.BaseFragment
+import kotlinx.android.synthetic.main.home_fragment.*
 
 class HomeFragment : BaseFragment() {
 
@@ -45,5 +51,33 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         logger.debug("onViewCreated savedInstanceState=$savedInstanceState")
+        recyclerViewRepos.layoutManager = LinearLayoutManager(context)
+        viewModel.repos.observe(viewLifecycleOwner, Observer {
+            logger.debug("observe it=$it")
+            recyclerViewRepos.adapter = ReposAdapter(it)
+        })
+    }
+
+    class ReposAdapter(private val items: List<Repo>) :
+        RecyclerView.Adapter<ReposAdapter.ViewHolder>() {
+        class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            val textView: TextView = itemView.findViewById<TextView>(android.R.id.text1)
+        }
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+            val itemView = LayoutInflater.from(parent.context)
+                .inflate(android.R.layout.simple_list_item_1, parent, false)
+            return ViewHolder(itemView)
+        }
+
+        override fun getItemCount(): Int {
+            return items.count()
+        }
+
+        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+            items[position].let {
+                holder.textView.text = it.name
+            }
+        }
     }
 }
