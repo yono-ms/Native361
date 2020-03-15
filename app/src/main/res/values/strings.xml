@@ -6,4 +6,6 @@
     <string name="app_name">Native361</string>
     <string name="text_loading">Now loading</string>
     <string name="button_ok">OK</string>
+    <string name="hint_login">login</string>
+    <string name="button_search">SEARCH</string>
 </resources>
