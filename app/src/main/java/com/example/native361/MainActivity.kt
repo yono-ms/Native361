@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity() {
         logger.info("onCreate savedInstanceState=$savedInstanceState")
         val binding =
             DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        // この行は果たして必要なのだろうか
         binding.appViewModel = appViewModel
         binding.lifecycleOwner = this
         if (savedInstanceState == null) {

@@ -39,6 +39,7 @@ class SplashFragment : BaseFragment() {
             container,
             false
         ).also {
+            // この行は果たして必要なのだろうか
             it.viewModel = viewModel
             it.lifecycleOwner = viewLifecycleOwner
         }

@@ -26,7 +26,7 @@
             android:ems="10"
             android:hint="@string/hint_login"
             android:importantForAutofill="no"
-            android:inputType="textPersonName"
+            android:inputType="textVisiblePassword"
             android:text="@={viewModel.login}"
             app:layout_constraintBottom_toBottomOf="@+id/buttonSearch"
             app:layout_constraintEnd_toStartOf="@+id/buttonSearch"
