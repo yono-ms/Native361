@@ -5,6 +5,7 @@
 package com.example.native361.ui.home
 
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +43,7 @@ class HomeFragment : BaseFragment() {
             container,
             false
         ).also {
+            // この行は果たして必要なのだろうか
             it.viewModel = viewModel
             it.lifecycleOwner = viewLifecycleOwner
         }
@@ -61,12 +63,13 @@ class HomeFragment : BaseFragment() {
     class ReposAdapter(private val items: List<Repo>) :
         RecyclerView.Adapter<ReposAdapter.ViewHolder>() {
         class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val textView: TextView = itemView.findViewById<TextView>(android.R.id.text1)
+            val textView1: TextView = itemView.findViewById(android.R.id.text1)
+            val textView2: TextView = itemView.findViewById(android.R.id.text2)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val itemView = LayoutInflater.from(parent.context)
-                .inflate(android.R.layout.simple_list_item_1, parent, false)
+                .inflate(android.R.layout.simple_list_item_2, parent, false)
             return ViewHolder(itemView)
         }
 
@@ -76,7 +79,8 @@ class HomeFragment : BaseFragment() {
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             items[position].let {
-                holder.textView.text = it.name
+                holder.textView1.text = it.name
+                holder.textView2.text = DateFormat.format("yyyy/MM/dd HH:mm:ss", it.updated_at)
             }
         }
     }
