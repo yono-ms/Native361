@@ -4,6 +4,7 @@
 
 package com.example.native361.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.LayoutInflater
@@ -16,6 +17,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.native361.R
+import com.example.native361.constant.ExtraKey
+import com.example.native361.constant.RequestCode
 import com.example.native361.databinding.HomeFragmentBinding
 import com.example.native361.repository.database.model.Repo
 import com.example.native361.ui.BaseFragment
@@ -58,6 +61,20 @@ class HomeFragment : BaseFragment() {
             logger.debug("observe it=$it")
             recyclerViewRepos.adapter = ReposAdapter(it)
         })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            RequestCode.SINGLE_CHOICE.rawValue -> {
+                logger.debug("resultCode=$resultCode")
+                data?.let {
+                    val choice = it.getStringExtra(ExtraKey.SINGLE_CHOICE.rawValue)
+                    logger.debug("choice=$choice")
+                    viewModel.login.value = choice
+                }
+            }
+            else -> super.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
     class ReposAdapter(private val items: List<Repo>) :
