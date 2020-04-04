@@ -5,5 +5,6 @@
 package com.example.native361.constant
 
 enum class RequestCode(val rawValue: Int) {
-    ALERT(100)
+    ALERT(100),
+    SINGLE_CHOICE(101)
 }

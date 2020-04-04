@@ -8,4 +8,11 @@
     <string name="button_ok">OK</string>
     <string name="hint_login">login</string>
     <string name="button_search">SEARCH</string>
+    <string name="button_history">HISTORY</string>
+    <string name="dialog_title_success">Success</string>
+    <string name="dialog_title_exception">Exception</string>
+    <string name="dialog_title_result">Result</string>
+    <string name="dialog_message_no_initialize">Initialize.</string>
+    <string name="dialog_message_no_repos">No repos.</string>
+    <string name="dialog_message_no_history">No history.</string>
 </resources>

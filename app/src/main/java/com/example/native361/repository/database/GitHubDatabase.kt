@@ -13,7 +13,8 @@ import com.example.native361.repository.database.model.*
     entities = [
         User::class,
         Repo::class,
-        License::class
+        License::class,
+        SearchHistory::class
     ],
     version = 1
 )
@@ -22,4 +23,5 @@ abstract class GitHubDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun repoDao(): RepoDao
     abstract fun licenseDao(): LicenseDao
+    abstract fun searchHistoryDao(): SearchHistoryDao
 }
