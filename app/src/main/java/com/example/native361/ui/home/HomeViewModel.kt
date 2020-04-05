@@ -28,6 +28,9 @@ class HomeViewModel : BaseViewModel() {
 
     fun search() {
         logger.debug("search login=${login.value}")
+        if (appViewModel.checkBusy()) {
+            return
+        }
         viewModelScope.launch {
             kotlin.runCatching {
                 GitHubRepository.getRepos(login.value!!)
@@ -51,12 +54,17 @@ class HomeViewModel : BaseViewModel() {
                     exception = it
                 )
                 repos.value = listOf()
+            }.also {
+                appViewModel.releaseBusy()
             }
         }
     }
 
     fun history() {
         logger.debug("history login=${login.value}")
+        if (appViewModel.checkBusy()) {
+            return
+        }
         viewModelScope.launch {
             kotlin.runCatching {
                 Native361Application.db.searchHistoryDao().getAllLogin()
@@ -82,6 +90,8 @@ class HomeViewModel : BaseViewModel() {
                     R.string.dialog_title_exception,
                     exception = it
                 )
+            }.also {
+                appViewModel.releaseBusy()
             }
         }
     }
